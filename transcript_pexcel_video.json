@@ -1,0 +1,947 @@
+{
+  "name": "My workflow 2433",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "19ThvomC4YG21krGwdLF9q8YvHCLvC6yZPV-FFjGZQc4",
+          "mode": "list",
+          "cachedResultName": "11_ALT_N8n_PEXEL_ transcrpt_To_Video",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19ThvomC4YG21krGwdLF9q8YvHCLvC6yZPV-FFjGZQc4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Audio",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19ThvomC4YG21krGwdLF9q8YvHCLvC6yZPV-FFjGZQc4/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -780,
+        -40
+      ],
+      "id": "fb7f2c0c-dc4a-42bd-837e-ad1d290270fb",
+      "name": "Lấy File Video từ Google Sheet",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "2DPcGTQPaiyywVU2",
+          "name": "GGS_20250606"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "19ThvomC4YG21krGwdLF9q8YvHCLvC6yZPV-FFjGZQc4",
+          "mode": "list",
+          "cachedResultName": "11_ALT_N8n_PEXEL_ transcrpt_To_Video",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19ThvomC4YG21krGwdLF9q8YvHCLvC6yZPV-FFjGZQc4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Audio",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19ThvomC4YG21krGwdLF9q8YvHCLvC6yZPV-FFjGZQc4/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $json.row_number }}",
+            "Status": "Pro"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Transcript",
+              "displayName": "Transcript",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Link  Audio ",
+              "displayName": "Link  Audio ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Link Video Ex",
+              "displayName": "Link Video Ex",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        -240,
+        -60
+      ],
+      "id": "cb6bd15d-56d9-4ded-a8bf-b4cd7fb5f3f4",
+      "name": "Cập Nhật Trạng Thái1",
+      "credentials": {
+        "googleApi": {
+          "id": "UFYSZcd8CgntABwS",
+          "name": "GSA_N"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "44512f3f-1609-4735-8bc4-771360140abe",
+              "leftValue": "={{ $json.Status }}",
+              "rightValue": "Run",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -520,
+        -40
+      ],
+      "id": "45c37cc1-f83b-4169-acfc-2ada53306c8d",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.pexels.com/v1/videos/search?page=2&per_page=40&query=nature%3Fper_page%3D4",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -40,
+        -60
+      ],
+      "id": "0629578c-280b-48cf-99c5-b5584b7a4e84",
+      "name": "Lấy Video 1 từ Pexel"
+    },
+    {
+      "parameters": {
+        "name": "Video-1",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1Iq7C9sE2g6HPosxEcKeM4RSrFt3FvUBD",
+          "mode": "list",
+          "cachedResultName": "100. Video_Pexels ",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1Iq7C9sE2g6HPosxEcKeM4RSrFt3FvUBD"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1080,
+        -60
+      ],
+      "id": "5572abb4-7d07-4a35-9033-83f474856093",
+      "name": "Upload Video1 lên Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "rxFyTs7otauqN2lC",
+          "name": "Google Drive account 9"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.webViewLink }}",
+          "mode": "url"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1300,
+        -60
+      ],
+      "id": "5f4bf887-c1b8-48d1-bd2f-6c6aedf3bcd0",
+      "name": "Chia Sẻ Video1 lên drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "rxFyTs7otauqN2lC",
+          "name": "Google Drive account 9"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "Video-2",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1Iq7C9sE2g6HPosxEcKeM4RSrFt3FvUBD",
+          "mode": "list",
+          "cachedResultName": "100. Video_Pexels ",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1Iq7C9sE2g6HPosxEcKeM4RSrFt3FvUBD"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1840,
+        -60
+      ],
+      "id": "2f120a3c-55a5-48b3-9155-ddd19da3c9f2",
+      "name": "Upload Video2 lên Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "rxFyTs7otauqN2lC",
+          "name": "Google Drive account 9"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.webViewLink }}",
+          "mode": "url"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2100,
+        -60
+      ],
+      "id": "886b53d6-ccc0-4bd9-aea3-da7e6e5175f0",
+      "name": "Chia Sẻ Video2 lên drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "rxFyTs7otauqN2lC",
+          "name": "Google Drive account 9"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "19ThvomC4YG21krGwdLF9q8YvHCLvC6yZPV-FFjGZQc4",
+          "mode": "list",
+          "cachedResultName": "11_ALT_N8n_PEXEL_ transcrpt_To_Video",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19ThvomC4YG21krGwdLF9q8YvHCLvC6yZPV-FFjGZQc4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Audio",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19ThvomC4YG21krGwdLF9q8YvHCLvC6yZPV-FFjGZQc4/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Lấy File Video từ Google Sheet').item.json.row_number }}",
+            "Status": "Success ",
+            "Link  Audio ": "={{ $('Upload Audio lên Drive').item.json.webViewLink }}",
+            "Link Video Ex": "={{$json.url}}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Transcript",
+              "displayName": "Transcript",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Link  Audio ",
+              "displayName": "Link  Audio ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Link Video Ex",
+              "displayName": "Link Video Ex",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1560,
+        200
+      ],
+      "id": "5eeb36d7-51fe-47d5-9e3f-cedd2cb780aa",
+      "name": "Cập Nhật Link Videovà Trạng Thái1",
+      "alwaysOutputData": true,
+      "executeOnce": false,
+      "credentials": {
+        "googleApi": {
+          "id": "UFYSZcd8CgntABwS",
+          "name": "GSA_N"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json[''][3].video_files[0].link }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        540,
+        -60
+      ],
+      "id": "43a9e6ce-4ce8-4881-9825-d05b98957fe5",
+      "name": "Download Video1 từ Pexel"
+    },
+    {
+      "parameters": {
+        "url": "={{ $('Lấy Các Video có thời gian bằng 11s').item.json[''][7].video_files[0].link }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2400,
+        -60
+      ],
+      "id": "90d6fb42-429f-48ed-bec9-1352ae98d718",
+      "name": "Download Video3 từ Pexel"
+    },
+    {
+      "parameters": {
+        "name": "Video-3",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1Iq7C9sE2g6HPosxEcKeM4RSrFt3FvUBD",
+          "mode": "list",
+          "cachedResultName": "100. Video_Pexels ",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1Iq7C9sE2g6HPosxEcKeM4RSrFt3FvUBD"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -420,
+        200
+      ],
+      "id": "3b3d7729-b069-43a6-8aeb-c51a4fd641a2",
+      "name": "Upload Video 3 lên Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "rxFyTs7otauqN2lC",
+          "name": "Google Drive account 9"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.webViewLink }}",
+          "mode": "url"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -220,
+        200
+      ],
+      "id": "d8cf5f85-d8a9-440f-8591-6d5fd4699550",
+      "name": "Chia Sẻ Video3 lên drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "rxFyTs7otauqN2lC",
+          "name": "Google Drive account 9"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $('Lấy Các Video có thời gian bằng 11s').item.json[''][5].video_files[0].link }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1560,
+        -60
+      ],
+      "id": "df70526f-9cd0-426c-8836-bde6a6f3510c",
+      "name": "Download Video2 từ Pexel"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "input": "={{ $('Lấy File Video từ Google Sheet').item.json.Transcript }}",
+        "voice": "echo",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        240,
+        200
+      ],
+      "id": "58e273c2-e07a-468a-9823-27585249259c",
+      "name": "Lấy Audio",
+      "credentials": {
+        "openAiApi": {
+          "id": "Ed8Jh9kqfVkHaB9Y",
+          "name": "OpenAi account 25_API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "Audio",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1szwJfD_ipoO-u0CEdyOqzTcksfPsqENF",
+          "mode": "list",
+          "cachedResultName": "100. Audio_N8n",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1szwJfD_ipoO-u0CEdyOqzTcksfPsqENF"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        460,
+        200
+      ],
+      "id": "a11b2c47-ef37-4632-95ed-dbbf0edc572a",
+      "name": "Upload Audio lên Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "rxFyTs7otauqN2lC",
+          "name": "Google Drive account 9"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.webViewLink }}",
+          "mode": "url"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        720,
+        200
+      ],
+      "id": "bc4af010-026e-444a-82a1-202dc088b3dc",
+      "name": "Chia Sẻ Audio lên drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "rxFyTs7otauqN2lC",
+          "name": "Google Drive account 9"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.creatomate.com/v1/renders",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"source\": {\n    \"output_format\": \"mp4\",\n    \"width\": 270,\n    \"height\": 480,\n    \"elements\": [\n      {\n        \"type\": \"audio\",\n        \"track\": 2,\n        \"source\": \"{{ $('Lấy Thông Tin Video và Audio để ghép Video').item.json.audio_1 }}\",\n        \"duration\": {{ $json.duration_audio }},\n        \"time\": 0\n      },\n      {\n        \"type\": \"video\",\n        \"track\": 1,\n        \"source\": \"{{ $('Lấy Thông Tin Video và Audio để ghép Video').item.json.video_1 }}\",\n        \"duration\": {{ $json.video_per_second }},\n        \"time\": 0\n      },\n      {\n        \"type\": \"video\",\n        \"track\": 1,\n        \"source\": \"{{ $('Lấy Thông Tin Video và Audio để ghép Video').item.json.video_2 }}\",\n        \"duration\": {{ $json.video_per_second }},\n        \"time\": {{ $json.video_per_second }}\n      },\n      {\n        \"type\": \"video\",\n        \"track\": 1,\n        \"source\": \"{{ $('Lấy Thông Tin Video và Audio để ghép Video').item.json.video_3 }}\",\n        \"duration\": {{ $json.video_per_second }},\n        \"time\": {{ $json.video_per_second * 2 }}\n      }\n    ]\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1260,
+        200
+      ],
+      "id": "85a714f2-4589-4cde-a353-1a4e504d02a2",
+      "name": "Ghép Video"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6c4ca77c-bca7-4ff0-af00-050b3aea2e96",
+              "name": "audio_1",
+              "value": "={{ $('Upload Audio lên Drive').item.json.webViewLink }}",
+              "type": "string"
+            },
+            {
+              "id": "ef551abc-4c7a-41ea-8dd0-fce4d9476dbb",
+              "name": "video_1",
+              "value": "={{ $('Upload Video1 lên Drive').item.json.webViewLink }}",
+              "type": "string"
+            },
+            {
+              "id": "6516035e-7189-4dbb-83bd-d94d71171fa1",
+              "name": "video_2",
+              "value": "={{ $('Upload Video2 lên Drive').item.json.webViewLink }}",
+              "type": "string"
+            },
+            {
+              "id": "16d245b9-e03d-473a-8f4a-3dcfa091af9e",
+              "name": "video_3",
+              "value": "={{ $('Upload Video 3 lên Drive').item.json.webViewLink }}",
+              "type": "string"
+            },
+            {
+              "id": "4f13c658-0805-4e79-950d-11878e0aa334",
+              "name": "duration_audio",
+              "value": "={{ \n  (parseInt($('Lấy Audio').item.json.fileSize.replace('kb', '')) * 1024 * 8) / 160000 \n}}\n",
+              "type": "number"
+            },
+            {
+              "id": "f58316ed-4e15-43ab-ab66-744ac05a4f1f",
+              "name": "video_per_second",
+              "value": "={{ \n  (parseInt($('Lấy Audio').item.json.fileSize.replace('kb', '')) * 1024 * 8) / (160000*3)\n}}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        980,
+        200
+      ],
+      "id": "f2eb6d22-2bd3-4672-9950-cb78730505d6",
+      "name": "Lấy Thông Tin Video và Audio để ghép Video"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "091cc703-3d83-42f7-9d94-809faad1d018",
+              "name": "",
+              "value": "={{ $json.videos.filter(video => video.duration > 10) }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        180,
+        -60
+      ],
+      "id": "669faeb9-3fe3-49d2-8ffa-d944679161c7",
+      "name": "Lấy Các Video có thời gian bằng 11s"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Lấy File Video từ Google Sheet": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Cập Nhật Trạng Thái1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cập Nhật Trạng Thái1": {
+      "main": [
+        [
+          {
+            "node": "Lấy Video 1 từ Pexel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lấy Video 1 từ Pexel": {
+      "main": [
+        [
+          {
+            "node": "Lấy Các Video có thời gian bằng 11s",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload Video1 lên Drive": {
+      "main": [
+        [
+          {
+            "node": "Chia Sẻ Video1 lên drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chia Sẻ Video1 lên drive": {
+      "main": [
+        [
+          {
+            "node": "Download Video2 từ Pexel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload Video2 lên Drive": {
+      "main": [
+        [
+          {
+            "node": "Chia Sẻ Video2 lên drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chia Sẻ Video2 lên drive": {
+      "main": [
+        [
+          {
+            "node": "Download Video3 từ Pexel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Video1 từ Pexel": {
+      "main": [
+        [
+          {
+            "node": "Upload Video1 lên Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Video3 từ Pexel": {
+      "main": [
+        [
+          {
+            "node": "Upload Video 3 lên Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload Video 3 lên Drive": {
+      "main": [
+        [
+          {
+            "node": "Chia Sẻ Video3 lên drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chia Sẻ Video3 lên drive": {
+      "main": [
+        [
+          {
+            "node": "Lấy Audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Video2 từ Pexel": {
+      "main": [
+        [
+          {
+            "node": "Upload Video2 lên Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lấy Audio": {
+      "main": [
+        [
+          {
+            "node": "Upload Audio lên Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chia Sẻ Audio lên drive": {
+      "main": [
+        [
+          {
+            "node": "Lấy Thông Tin Video và Audio để ghép Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload Audio lên Drive": {
+      "main": [
+        [
+          {
+            "node": "Chia Sẻ Audio lên drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ghép Video": {
+      "main": [
+        [
+          {
+            "node": "Cập Nhật Link Videovà Trạng Thái1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lấy Thông Tin Video và Audio để ghép Video": {
+      "main": [
+        [
+          {
+            "node": "Ghép Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lấy Các Video có thời gian bằng 11s": {
+      "main": [
+        [
+          {
+            "node": "Download Video1 từ Pexel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "5c455539-8fdb-455a-a11c-40d431006924",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "94a383c02457267bcc44878635a0fa02b7d3206c5479bfc8890faa812e2bbd97"
+  },
+  "id": "14fOf94IEFsKHzft",
+  "tags": []
+}
